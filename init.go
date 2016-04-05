@@ -2,14 +2,15 @@ package main
 
 import (
 	"archive/zip"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 )
 
-func download(link, _ string) {
+// ignore errors
+
+func mustDownload(link, _ string) {
 	r, _ := http.Get(link)
 	defer r.Body.Close()
 	d, _ := ioutil.ReadAll(r.Body)
@@ -17,7 +18,7 @@ func download(link, _ string) {
 	ioutil.WriteFile(fn, d, 0777)
 }
 
-func exactZip(fp string) {
+func mustExactZip(fp string) {
 	r, _ := zip.OpenReader(fp)
 	defer r.Close()
 	for _, f := range r.File {
@@ -58,8 +59,8 @@ var (
 func init() {
 	if fileIsNotExist(PHANTOMJS_PATH) {
 		if fileIsNotExist(PHANTOMJS_ZIP_PATH) {
-			download(PHANTOMJS_ZIP_LINK, ".")
+			mustDownload(PHANTOMJS_ZIP_LINK, ".")
 		}
-		exactZip(PHANTOMJS_ZIP_PATH)
+		mustExactZip(PHANTOMJS_ZIP_PATH)
 	}
 }

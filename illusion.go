@@ -14,6 +14,6 @@ func DirectGet(url string) []byte {
 }
 
 func PrerenderGet(url string) []byte {
-	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url).Output()
+	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url, "0", "0", "desktop").Output()
 	return out
 }
