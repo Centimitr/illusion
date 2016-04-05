@@ -1,2 +1,2 @@
 # illusion
-Still early stage. A simple golang wrapped prerender using PhantomJs. Functional http response intergration is planned. Script referenced an article, link see the file.
+Still early stage. A simple golang wrapped prerender using PhantomJs. Functional http response intergration is planned.
