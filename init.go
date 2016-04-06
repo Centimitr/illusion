@@ -1,4 +1,4 @@
-package main
+package illusion
 
 import (
 	"archive/zip"

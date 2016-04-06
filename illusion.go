@@ -1,4 +1,4 @@
-package main
+package illusion
 
 import (
 	"io/ioutil"
@@ -13,7 +13,19 @@ func DirectGet(url string) []byte {
 	return body
 }
 
-func PrerenderGet(url string) []byte {
-	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url, "0", "0", "desktop").Output()
+func prerenderGet(url, viewport string) []byte {
+	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url, PRERENDER_PROCESS_TIMEOUT, PRERENDER_REFRESH_TIMEOUT, viewport).Output()
 	return out
+}
+
+func PrerenderGet(url string) []byte {
+	return prerenderGet(url, PRERENDER_DEFAULT_VIEWPORT)
+}
+
+func PrerenderGetDesktop(url string) []byte {
+	return prerenderGet(url, "desktop")
+}
+
+func PrerenderGetMobile(url string) []byte {
+	return prerenderGet(url, "mobile")
 }
