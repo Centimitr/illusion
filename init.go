@@ -48,6 +48,7 @@ func fileIsNotExist(path string) bool {
 	return !fileIsExist(path)
 }
 
+// Now only windows support, you can easily modify settings for your environment
 var (
 	OS                 = "windows"
 	PHANTOMJS_ZIP_LINK = "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip"

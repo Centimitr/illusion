@@ -1,3 +1,4 @@
+// This package implements simple prerender using PhantomJS
 package illusion
 
 import (
@@ -6,6 +7,7 @@ import (
 	"os/exec"
 )
 
+// Common http.get and directly return r.Body's content
 func DirectGet(url string) []byte {
 	r, _ := http.Get(url)
 	defer r.Body.Close()
@@ -18,14 +20,17 @@ func prerenderGet(url, viewport string) []byte {
 	return out
 }
 
+// Request and wait for page's loading use PhantomJS with default viewport.
 func PrerenderGet(url string) []byte {
 	return prerenderGet(url, PRERENDER_DEFAULT_VIEWPORT)
 }
 
+// Request and wait for page's loading use PhantomJS with desktop viewport.
 func PrerenderGetDesktop(url string) []byte {
 	return prerenderGet(url, "desktop")
 }
 
+// Request and wait for page's loading use PhantomJS with mobile viewport.
 func PrerenderGetMobile(url string) []byte {
 	return prerenderGet(url, "mobile")
 }
