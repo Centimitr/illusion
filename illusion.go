@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os/exec"
+	"strconv"
 )
 
 // Common http.get and directly return r.Body's content
@@ -16,7 +17,7 @@ func DirectGet(url string) []byte {
 }
 
 func prerenderGet(url, viewport string) []byte {
-	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url, PRERENDER_PROCESS_TIMEOUT, PRERENDER_REFRESH_TIMEOUT, viewport).Output()
+	out, _ := exec.Command(PHANTOMJS_PATH, PHANTOMJS_SCRIPT, url, strconv.Itoa(PRERENDER_PROCESS_TIMEOUT), strconv.Itoa(PRERENDER_REFRESH_TIMEOUT), viewport).Output()
 	return out
 }
 
